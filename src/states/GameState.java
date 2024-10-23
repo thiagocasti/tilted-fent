@@ -16,7 +16,7 @@ public class GameState {
 	}
 	public void update() 
 	{
-		
+		player.update();
 	}
 	//caracteristicas en comun de objetos 
 	//como puede ser posicion

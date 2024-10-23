@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import graphics.Assets;
+import input.KeyBoard;
 import states.GameState;
 
 
@@ -29,7 +30,7 @@ public class Window extends JFrame implements Runnable {
 	private int AVERAGEFPS=	FPS;
 	
 	private GameState gameState;
-	
+	private KeyBoard keyBoard;
 	public Window()
 	{
 		setTitle("Tilted Fent");
@@ -40,6 +41,7 @@ public class Window extends JFrame implements Runnable {
 		setVisible(true);
 		
 		canvas= new Canvas();
+		keyBoard= new KeyBoard();
 		
 		canvas.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		canvas.setMaximumSize(new Dimension(WIDTH,HEIGHT));
@@ -47,6 +49,7 @@ public class Window extends JFrame implements Runnable {
 		canvas.setFocusable(true);
 		
 		add(canvas);
+		canvas.addKeyListener(keyBoard);
 	}
 	
 	public static void main(String[] args) 
@@ -56,6 +59,7 @@ public class Window extends JFrame implements Runnable {
 	
 	private void update() 
 	{
+		keyBoard.update();
 		gameState.update();
 	}
 	private void draw() 
