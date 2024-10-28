@@ -29,6 +29,15 @@ public class Vector2D {
 	public void setY(double y) {
 		this.y = y;
 	}
+
+	public void add(int i,boolean Dir) {
+		if(Dir) {
+			  x += i; // Sumar i a x y actualizar el valor de x
+		}else {
+			x -= i;
+		}
+	   
+	}
 	
 	
 	

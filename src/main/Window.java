@@ -14,7 +14,7 @@ import states.GameState;
 
 public class Window extends JFrame implements Runnable {
 	
-	public static final int WIDTH=800, HEIGHT=600;
+	public static final int WIDTH=1920, HEIGHT=1080;
 	private Canvas canvas;
 	private Thread thread;
 	
@@ -79,6 +79,8 @@ public class Window extends JFrame implements Runnable {
 		g.drawString(""+ AVERAGEFPS, 10, 10);
 		//dibuja el estado
 		gameState.draw(g);
+		
+		
 		
 		//termina draw
 		
