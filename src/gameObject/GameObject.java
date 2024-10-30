@@ -2,13 +2,16 @@ package gameObject;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import math.Vector2D;
+import states.GameState;
 
 public abstract class GameObject {
-
+	public List<GameState> objects;
 	protected BufferedImage texture;
-	
+	 private List<Enemigo> Enemys;
 	protected Vector2D position;
 	//aca pasa la posicion, desde vector2d importado
 	// y se pasa la imagen de bufferedimage que es la que se carga desde asstes
@@ -18,6 +21,10 @@ public abstract class GameObject {
 	{
 		this.position= position;
 		this.texture= texture;
+	}
+	
+	public Vector2D getCenter(){
+		return new Vector2D(position.getX()- texture.getWidth(null)/2,position.getY()- texture.getHeight(null)/2);
 	}
 	
 	public abstract void update() ;
