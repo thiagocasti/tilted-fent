@@ -10,7 +10,7 @@ import states.GameState;
 
 public abstract class GameObject {
 	public List<GameState> objects;
-	protected BufferedImage texture;
+	public BufferedImage texture;
 	 private List<Enemigo> Enemys;
 	protected Vector2D position;
 	//aca pasa la posicion, desde vector2d importado

@@ -17,14 +17,21 @@ public class Player extends GameObject{
 	 private boolean MovingLeft = false;
 	 private int FrameCount;
 	 private int FrameSmoke=0;
+	 public int vidaPlayer= 100;
 	 //es el cooldawn de el humo, 48 es igual a 2 segundos
 	 private int Cooldawn= 48;
+	 
+	 
+	 private static final int COOLDOWN_TIME = 50;
+	 private int damageCooldown ;
 	 // este es un tipo de lista para los bojetos
-	 private List<Shoot> shoots;
+	 public List<Shoot> shoots;
 	 
 	public Player(Vector2D position, BufferedImage texture) {
 		super(position, texture);
 		shoots = new ArrayList<>();
+		vidaPlayer = 100;
+		damageCooldown = 0; 
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -66,8 +73,22 @@ public class Player extends GameObject{
 		for (Shoot shoot : shoots) {
             shoot.update();
         }
+		if (damageCooldown > 0) {
+	        damageCooldown--;
+	    }
 	}
+	
+	 public boolean canReceiveDamage() {
+	        return damageCooldown <= 0; // Puede recibir daño si cooldown es 0
+	    }
 
+	    public void receiveDamage(int amount) {
+	        if (canReceiveDamage()) {
+	            vidaPlayer -= amount;
+	            damageCooldown = COOLDOWN_TIME; // Reinicia el cooldown
+	        }
+	    }
+	 
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
