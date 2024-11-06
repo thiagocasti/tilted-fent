@@ -27,6 +27,10 @@ public class Player extends GameObject{
 	 // este es un tipo de lista para los bojetos
 	 public List<Shoot> shoots;
 	 
+	 public List<Shoot> getShoot() {
+		 return shoots;
+	 };
+	 
 	public Player(Vector2D position, BufferedImage texture) {
 		super(position, texture);
 		shoots = new ArrayList<>();
@@ -121,7 +125,8 @@ public class Player extends GameObject{
 		        		
 		        }
 	        }
-		g.drawString("X:"+ (int)position.getX() +" Y: "+(int)position.getY() , 30, 10);	
+		g.drawString("X:"+ (int)position.getX() +" Y: "+(int)position.getY() , 30, 10);
+		g.drawString("Vida jugador "+ vidaPlayer , 10, 30);	
 		
 		 MovingRight = false;
 		 MovingLeft = false;
