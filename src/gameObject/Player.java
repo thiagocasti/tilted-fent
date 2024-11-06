@@ -25,11 +25,14 @@ public class Player extends GameObject{
 	 private static final int COOLDOWN_TIME = 50;
 	 private int damageCooldown ;
 	 // este es un tipo de lista para los bojetos
-	 public List<Shoot> shoots;
+	 public List<Shoot> shoots = new ArrayList<>();
 	 
 	 public List<Shoot> getShoot() {
 		 return shoots;
 	 };
+	 public void addShoot(Shoot shoot) {
+	        shoots.add(shoot);
+	    }
 	 
 	public Player(Vector2D position, BufferedImage texture) {
 		super(position, texture);

@@ -53,7 +53,11 @@ public class GameState {
 		        iterator.remove();
 		        System.out.println("objeto eliminado");
 		    }
-		}
+		    enemigo.dispararEnemigo(enemigo.getPosition(),player.getPosition());
+		    for (Shoot shootsEnemys : enemigo.getShoot()) {
+		    	colition(player.getPosition(), shootsEnemys.getPosition(), player);
+		    }
+		} 
 		
 		damageIndicators.removeIf(DamageIndicator::isExpired);
 	    for (DamageIndicator indicator : damageIndicators) {
