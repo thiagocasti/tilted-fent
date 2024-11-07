@@ -11,6 +11,7 @@ import gameObject.GameObject;
 import gameObject.Player;
 import gameObject.Shoot;
 import graphics.Assets;
+import main.Window;
 import math.Vector2D;
 
 public class GameState {
@@ -18,6 +19,7 @@ public class GameState {
 	private Player player;
 	public List<Enemigo> enemigos;
 	private List<DamageIndicator> damageIndicators;
+	public int Lvl=3;
 	public GameState() 
 	{
 		player = new Player(new Vector2D(100,100),Assets.player);
@@ -26,9 +28,8 @@ public class GameState {
 
 		damageIndicators = new ArrayList<>();
 		// Añadir enemigos a la lista
-		enemigos.add(new Enemigo(new Vector2D(600, 400), Assets.player));
-		enemigos.add(new Enemigo(new Vector2D(400, 400), Assets.player));
-		enemigos.add(new Enemigo(new Vector2D(500, 500), Assets.player));
+		enemigos.add(new Enemigo(spawnRandom(), Assets.player));
+		
 	}
 	public void update() 
 	{	 
@@ -36,6 +37,8 @@ public class GameState {
 		{
 		player.update();
 		}
+		//los enemigos cargados para la siguiente ronda
+		List<Enemigo> nuevosEnemigos = new ArrayList<>();
 		
 		//iterator hace posible eliminar los objetos de la lista sin que explote todo  
 		Iterator<Enemigo> iterator = enemigos.iterator();
@@ -52,12 +55,19 @@ public class GameState {
 		    if (enemigo.vidaEnemigo <= 0) {
 		        iterator.remove();
 		        System.out.println("objeto eliminado");
+		        if(siguienteRonda()) {
+		        	//se termina la ronda y empieza otra 
+		        	 System.out.println("Se termino la ronda");
+		        	 iniciaRondaNueva(nuevosEnemigos);
+		        }
 		    }
 		    enemigo.dispararEnemigo(enemigo.getPosition(),player.getPosition());
 		    for (Shoot shootsEnemys : enemigo.getShoot()) {
 		    	colition(player.getPosition(), shootsEnemys.getPosition(), player);
 		    }
+		    
 		} 
+		enemigos.addAll(nuevosEnemigos);
 		
 		damageIndicators.removeIf(DamageIndicator::isExpired);
 	    for (DamageIndicator indicator : damageIndicators) {
@@ -107,4 +117,26 @@ public class GameState {
 	    DamageIndicator indicator = new DamageIndicator(damagePos, dano, 60);
 	    damageIndicators.add(indicator);	
 	}
+	
+	private Vector2D spawnRandom() {
+		double x; 
+		double y= Math.random() *Window.HEIGHT;
+		if (Math.random() > 0.5) {
+	      
+	        x = Math.random() * 15 - 15; 
+	    } else {
+	       
+	        x = Math.random() * 15 + Window.WIDTH;  
+	    }
+		return new Vector2D(x,y);
+	}
+	public boolean siguienteRonda() {
+	    return enemigos.isEmpty();  // Devuelve true si no hay enemigos
+	}
+	public void iniciaRondaNueva(List<Enemigo> nuevosEnemigos) {
+	    for (int i = 0; i < Lvl*2; i++) {
+	    	nuevosEnemigos.add(new Enemigo(spawnRandom(), Assets.player));
+	    }
+	}
+
 }

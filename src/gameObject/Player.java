@@ -63,8 +63,8 @@ public class Player extends GameObject{
 		if(KeyBoard.A) {position.setX(position.getX()-3); facingRight = false; MovingLeft= true;}
 		if(KeyBoard.SHOOT && Cooldawn >=48) { shoot(); Cooldawn=0; };
 		
-		if( (int)position.getY()> Window.HEIGHT-212) {
-			position.setY(Window.HEIGHT-212);
+		if( (int)position.getY()> Window.HEIGHT-100) {
+			position.setY(Window.HEIGHT-100);
 		}
 		if( (int)position.getY()< 0) {
 			position.setY(0);
