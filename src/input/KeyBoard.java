@@ -7,7 +7,7 @@ public class KeyBoard implements KeyListener{
 	
 	private boolean[] keys = new boolean[256];
 	
-	public static boolean W,S,D,A,SHOOT;
+	public static boolean W,S,D,A,SHOOT,SPACEBAR;
 	
 	
  public KeyBoard() 
@@ -17,6 +17,7 @@ public class KeyBoard implements KeyListener{
 	 D=false;
 	 A=false;
 	 SHOOT=false;
+	 SPACEBAR=false;
  }
 
  public void update() 
@@ -26,6 +27,7 @@ public class KeyBoard implements KeyListener{
 	 D =keys[KeyEvent.VK_D];
 	 A =keys[KeyEvent.VK_A];
 	 SHOOT =keys[KeyEvent.VK_K];
+	 SPACEBAR=keys[KeyEvent.VK_SPACE];
  }
  
 @Override

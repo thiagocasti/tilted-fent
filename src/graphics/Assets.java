@@ -15,6 +15,8 @@ public class Assets {
 	
 	public static BufferedImage Shoot;
 	
+	public static BufferedImage Win;
+	
 	public static void init() 
 	{
 		player= Loader.ImageLoader("/Player/frame default 1.png");
@@ -38,6 +40,8 @@ public class Assets {
 		SmokeRun13= Loader.ImageLoader("/Player/PlayerEffects/frame effect 13.png");
 		
 		Shoot= Loader.ImageLoader("/Player/PlayerEffects/frame Shoot 1.png");
+		
+		Win= Loader.ImageLoader("/Player/GANASTE.png");
 	}
 	
 }

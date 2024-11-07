@@ -20,7 +20,10 @@ public class Player extends GameObject{
 	 public int vidaPlayer= 100;
 	 //es el cooldawn de el humo, 48 es igual a 2 segundos
 	 private int Cooldawn= 48;
-	 
+	 private int CooldawnSpace=100;
+	 private int dashDuration = 5; // Duración del dash (en fotogramas)
+	 private int dashTimer = 0; // Temporizador para controlar el dash
+	 public int Speed= 5;
 	 
 	 private static final int COOLDOWN_TIME = 50;
 	 private int damageCooldown ;
@@ -57,12 +60,16 @@ public class Player extends GameObject{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		if(KeyBoard.W) {position.setY(position.getY()-3);}
-		if(KeyBoard.S) {position.setY(position.getY()+3);}
-		if(KeyBoard.D) {position.setX(position.getX()+5); facingRight = true; MovingRight= true;}
-		if(KeyBoard.A) {position.setX(position.getX()-3); facingRight = false; MovingLeft= true;}
+		if(KeyBoard.W) {position.setY(position.getY()-Speed);}
+		if(KeyBoard.S) {position.setY(position.getY()+Speed);}
+		if(KeyBoard.D) {position.setX(position.getX()+Speed); facingRight = true; MovingRight= true;}
+		if(KeyBoard.A) {position.setX(position.getX()-Speed); facingRight = false; MovingLeft= true;}
 		if(KeyBoard.SHOOT && Cooldawn >=48) { shoot(); Cooldawn=0; };
-		
+		if (KeyBoard.SPACEBAR && CooldawnSpace >= 100 && dashTimer <= 0) {
+		    Speed = 15;  // Aumenta la velocidad durante el dash
+		    dashTimer = dashDuration;  // Inicia el temporizador del dash
+		    CooldawnSpace = 0;  // Resetea el cooldown del dash
+		}
 		if( (int)position.getY()> Window.HEIGHT-100) {
 			position.setY(Window.HEIGHT-100);
 		}
@@ -137,6 +144,17 @@ public class Player extends GameObject{
 		 if(Cooldawn <= 48) {
 			 Cooldawn++;
 		 }
+		 if (CooldawnSpace <= 100) {
+		        CooldawnSpace++;
+		    }
+		 if (dashTimer > 0) {
+			    dashTimer--;  // Cuenta atrás para el final del dash
+			} else {
+			    Speed = 5;  // Restablece la velocidad normal después del dash
+			}
+		 if(CooldawnSpace >= 15) {
+			 Speed=3;
+		 }
 		 if (FrameCount>5) {
 			 FrameSmoke++;
 		 }
@@ -151,5 +169,5 @@ public class Player extends GameObject{
 	            shoot.draw(g);
 	        }
 	}
-
+	
 }

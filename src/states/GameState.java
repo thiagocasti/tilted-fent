@@ -1,6 +1,7 @@
 package states;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -134,9 +135,15 @@ public class GameState {
 	    return enemigos.isEmpty();  // Devuelve true si no hay enemigos
 	}
 	public void iniciaRondaNueva(List<Enemigo> nuevosEnemigos) {
-	    for (int i = 0; i < Lvl*2; i++) {
+		Lvl=Lvl*2;
+	    for (int i = 0; i < Lvl; i++) {
 	    	nuevosEnemigos.add(new Enemigo(spawnRandom(), Assets.player));
 	    }
+	}
+	
+	public void Win(Graphics g) {
+		BufferedImage Win= Assets.Win;
+		g.drawImage(Win, 0, 0, Window.WIDTH, Window.HEIGHT, null);
 	}
 
 }

@@ -79,7 +79,9 @@ public class Window extends JFrame implements Runnable {
 		g.drawString(""+ AVERAGEFPS, 10, 10);
 		//dibuja el estado
 		gameState.draw(g);
-		
+		if (gameState.Lvl>=30) {
+			gameState.Win(g);
+		}
 		
 		
 		//termina draw
