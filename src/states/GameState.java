@@ -32,49 +32,62 @@ public class GameState {
 		enemigos.add(new Enemigo(spawnRandom(), Assets.player));
 		
 	}
-	public void update() 
-	{	 
-		if (player.vidaPlayer>1) 
-		{
-		player.update();
-		}
-		//los enemigos cargados para la siguiente ronda
-		List<Enemigo> nuevosEnemigos = new ArrayList<>();
-		
-		//iterator hace posible eliminar los objetos de la lista sin que explote todo  
-		Iterator<Enemigo> iterator = enemigos.iterator();
-		while (iterator.hasNext()) {
-		    Enemigo enemigo = iterator.next();
-		    enemigo.update();
-		    
-		    // se detecta colision en jugador y enemigo
-		    colition(player.getPosition(), enemigo.getPosition(), player);
-		   for (Shoot shoots : player.getShoot()) {
-		    colition(enemigo.getPosition(), shoots.getPosition(), enemigo);
-		    };
-		    // si la vida llega a 0 se elimina 
-		    if (enemigo.vidaEnemigo <= 0) {
-		        iterator.remove();
-		        System.out.println("objeto eliminado");
-		        if(siguienteRonda()) {
-		        	//se termina la ronda y empieza otra 
-		        	 System.out.println("Se termino la ronda");
-		        	 iniciaRondaNueva(nuevosEnemigos);
-		        }
-		    }
-		    enemigo.dispararEnemigo(enemigo.getPosition(),player.getPosition());
-		    for (Shoot shootsEnemys : enemigo.getShoot()) {
-		    	colition(player.getPosition(), shootsEnemys.getPosition(), player);
-		    }
-		    
-		} 
-		enemigos.addAll(nuevosEnemigos);
-		
-		damageIndicators.removeIf(DamageIndicator::isExpired);
+	public void update() {	 
+	    if (player.vidaPlayer > 1) {
+	        player.update();
+	    }
+	    
+	    // Lista para los nuevos enemigos en la siguiente ronda
+	    List<Enemigo> nuevosEnemigos = new ArrayList<>();
+	    
+	    // Usamos iterator para eliminar enemigos de forma segura
+	    Iterator<Enemigo> iterator = enemigos.iterator();
+	    while (iterator.hasNext()) {
+	        Enemigo enemigo = iterator.next();
+	        enemigo.update();
+	        
+	        // Detecta colisión entre jugador y enemigo
+	        colition(player.getPosition(), enemigo.getPosition(), player, null);
+	        
+	        // Usa un iterator para los disparos del jugador
+	        Iterator<Shoot> shootIterator = player.getShoot().iterator();
+	        while (shootIterator.hasNext()) {
+	            Shoot shoot = shootIterator.next();
+	            colition(enemigo.getPosition(), shoot.getPosition(), enemigo, shootIterator); // Pasa el iterator a colition
+	            
+	            // Si la vida del enemigo llega a 0, se elimina
+	            if (enemigo.vidaEnemigo <= 0) {
+	                iterator.remove();
+	                System.out.println("Enemigo eliminado");
+	                
+	                if (siguienteRonda()) {
+	                    System.out.println("Se terminó la ronda");
+	                    iniciaRondaNueva(nuevosEnemigos);
+	                }
+	                break; // Sale del bucle de disparos si el enemigo fue eliminado
+	            }
+	        }
+	        
+	        // Disparos del enemigo hacia el jugador
+	        enemigo.dispararEnemigo(enemigo.getPosition(), player.getPosition());
+	        
+	        for (Shoot shootsEnemys : enemigo.getShoot()) {
+	            colition(player.getPosition(), shootsEnemys.getPosition(), player, null);
+	        }
+	        
+	        // Movimiento del enemigo
+	        enemigo.Move(player.getPosition(), enemigo.getPosition());
+	    }
+	    
+	    enemigos.addAll(nuevosEnemigos);
+
+	    // Actualiza y elimina los indicadores de daño expirados
+	    damageIndicators.removeIf(DamageIndicator::isExpired);
 	    for (DamageIndicator indicator : damageIndicators) {
 	        indicator.update();
 	    }
 	}
+
 	//caracteristicas en comun de objetos 
 	//como puede ser posicion
 	public void draw(Graphics g) 
@@ -91,7 +104,7 @@ public class GameState {
 			enemigo.draw(g);
 		}
 	}
-	public void colition(Vector2D a, Vector2D b, GameObject character) {
+	public void colition(Vector2D a, Vector2D b, GameObject character,Iterator<Shoot> shootIterator) {
 	    int width = character.texture.getWidth();
 	    int height = character.texture.getHeight();
 
@@ -109,8 +122,12 @@ public class GameState {
 	            if (enemigo.canReceiveDamage()) {
 	                enemigo.receiveDamage(10);
 	                mostrarIndicadorDeDano(enemigo, "-10");
+	                
 	            }
 	        }
+	        if (shootIterator != null) {
+                shootIterator.remove();
+            }
 	    }
 	}
 	private void mostrarIndicadorDeDano(GameObject character, String dano) {

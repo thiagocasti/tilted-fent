@@ -1,6 +1,7 @@
 package gameObject;
 
 import java.awt.Graphics;
+import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,4 +99,36 @@ public class Enemigo extends GameObject{
 		}
 		return new Vector2D(x,y);
 	}
+	Random rand = new Random();
+	double speed = 2 + rand.nextDouble() * 3;
+	int minDistanceX = 300 + rand.nextInt(300);
+    int minDistanceY = 100 + rand.nextInt(150); 
+
+public void Move(Vector2D a, Vector2D b) {
+   
+    int detectionRangeX = 900; 
+    int detectionRangeY = 500; 
+
+
+    double deltaX = a.getX() - b.getX();
+    double deltaY = a.getY() - b.getY();
+
+
+    double absDeltaX = Math.abs(deltaX);
+    double absDeltaY = Math.abs(deltaY);
+
+    boolean shouldFollow = (absDeltaX <= detectionRangeX && absDeltaY <= detectionRangeY) || vidaEnemigo < 45;
+
+    if (shouldFollow && (absDeltaX > minDistanceX || absDeltaY > minDistanceY)) {
+
+    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    double directionX = deltaX / distance;
+    double directionY = deltaY / distance;
+
+    position.setX(b.getX() + directionX * speed);
+    position.setY(b.getY() + directionY * speed);
+    }
+}
+
 }
