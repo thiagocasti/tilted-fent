@@ -91,7 +91,10 @@ public class GameState {
 	//caracteristicas en comun de objetos 
 	//como puede ser posicion
 	public void draw(Graphics g) 
-	{
+	{	
+		BufferedImage Map= Assets.Map;
+		g.drawImage(Map, 0, 0, Window.WIDTH, Window.HEIGHT, null);
+		
 		if (player.vidaPlayer>1) 
 		{
 			player.draw(g);

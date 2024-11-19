@@ -17,6 +17,8 @@ public class Assets {
 	
 	public static BufferedImage Win;
 	
+	public static BufferedImage Map;
+	
 	public static void init() 
 	{
 		player= Loader.ImageLoader("/Player/frame default 1.png");
@@ -42,6 +44,8 @@ public class Assets {
 		Shoot= Loader.ImageLoader("/Player/PlayerEffects/frame Shoot 1.png");
 		
 		Win= Loader.ImageLoader("/Player/GANASTE.png");
+		
+		Map= Loader.ImageLoader("/Player/Mapajuego.jpg");
 	}
 	
 }
