@@ -29,7 +29,7 @@ public class GameState {
 
 		damageIndicators = new ArrayList<>();
 		// Añadir enemigos a la lista
-		enemigos.add(new Enemigo(spawnRandom(), Assets.player));
+		enemigos.add(new Enemigo(spawnRandom(), Assets.Enemigo));
 		
 	}
 	public void update() {	 
@@ -157,7 +157,7 @@ public class GameState {
 	public void iniciaRondaNueva(List<Enemigo> nuevosEnemigos) {
 		Lvl=Lvl*2;
 	    for (int i = 0; i < Lvl; i++) {
-	    	nuevosEnemigos.add(new Enemigo(spawnRandom(), Assets.player));
+	    	nuevosEnemigos.add(new Enemigo(spawnRandom(), Assets.Enemigo));
 	    }
 	}
 	

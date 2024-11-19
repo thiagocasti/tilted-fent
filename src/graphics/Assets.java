@@ -19,6 +19,10 @@ public class Assets {
 	
 	public static BufferedImage Map;
 	
+	public static BufferedImage Enemigo;
+	public static BufferedImage Shoot_Enemigo;
+
+	
 	public static void init() 
 	{
 		player= Loader.ImageLoader("/Player/frame default 1.png");
@@ -26,6 +30,10 @@ public class Assets {
 		MoveRightPlayer= Loader.ImageLoader("/Player/frame adelante 1.png");
 		
 		MoveLeftPlayer= Loader.ImageLoader("/Player/frame atras 1.png");
+		
+		Enemigo= Loader.ImageLoader("/Player/EnemigoFrame1.png");
+		
+		Shoot_Enemigo= Loader.ImageLoader("/Player/Enemigo_Shoot.png");
 		
 		SmokeRun1= Loader.ImageLoader("/Player/PlayerEffects/frame effect 1.png");
 		SmokeRun2= Loader.ImageLoader("/Player/PlayerEffects/frame effect 2.png");
