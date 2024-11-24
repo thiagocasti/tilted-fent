@@ -9,6 +9,7 @@ import java.util.List;
 import graphics.Assets;
 import main.Window;
 import math.Vector2D;
+import states.MenuState;
 
 public class Enemigo extends GameObject{
 	
@@ -74,6 +75,7 @@ public class Enemigo extends GameObject{
 	public void dispararEnemigo(Vector2D a, Vector2D b) {
 	    if (a.getY() + 30 > b.getY() && a.getY() < b.getY() + 30 && disparoCooldown == 0) {
 	        BufferedImage shootTexture = Assets.Shoot_Enemigo;
+	        MenuState.playSound("./res/Disparo.wav");
 	        Shoot disparo = new Shoot(new Vector2D(position.getX()+ (DirShoot(a,b) ? 15:-15), position.getY()), shootTexture, DirShoot(a,b));
 	        shootsEnemys.add(disparo);  // Ahora se añade a la instancia específica de Player
 	        disparoCooldown =45;

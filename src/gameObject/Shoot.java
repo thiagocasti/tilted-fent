@@ -3,6 +3,7 @@ package gameObject;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import math.Vector2D;
+import states.MenuState;
 
 public class Shoot extends GameObject {
     private boolean Dir;

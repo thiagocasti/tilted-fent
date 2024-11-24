@@ -9,6 +9,7 @@ import graphics.Assets;
 import input.KeyBoard;
 import main.Window;
 import math.Vector2D;
+import states.MenuState;
 
 public class Player extends GameObject{
 	
@@ -47,6 +48,7 @@ public class Player extends GameObject{
 	
 	public void shoot() {
 	    // Crea un nuevo disparo en la posición actual del jugador
+	MenuState.playSound("./res/Disparo.wav");
 	BufferedImage shootTexture = Assets.Shoot;
 	Shoot newShoot = new Shoot(new Vector2D(position.getX(), position.getY()), shootTexture,facingRight); 
 	    // Añade el disparo a la lista de disparos (suponiendo que existe una lista en el juego)
@@ -69,6 +71,7 @@ public class Player extends GameObject{
 		    Speed = 15;  // Aumenta la velocidad durante el dash
 		    dashTimer = dashDuration;  // Inicia el temporizador del dash
 		    CooldawnSpace = 0;  // Resetea el cooldown del dash
+		    MenuState.playSound("./res/Dashh.wav");
 		}
 		if( (int)position.getY()> Window.HEIGHT-100) {
 			position.setY(Window.HEIGHT-100);

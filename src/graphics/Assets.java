@@ -21,6 +21,8 @@ public class Assets {
 	
 	public static BufferedImage Enemigo;
 	public static BufferedImage Shoot_Enemigo;
+	
+	public static BufferedImage FondoMenu;
 
 	
 	public static void init() 
@@ -54,6 +56,8 @@ public class Assets {
 		Win= Loader.ImageLoader("/Player/GANASTE.png");
 		
 		Map= Loader.ImageLoader("/Player/Mapajuego.jpg");
+		
+		//FondoMenu= Loader.ImageLoader("FondoMenu.png");
 	}
 	
 }
