@@ -15,7 +15,7 @@ import states.State;
 
 public class Window extends JFrame implements Runnable {
 
-    public static final int WIDTH = 1920, HEIGHT = 1080;
+    public static final int WIDTH = 1400, HEIGHT = 800;
     private Canvas canvas;
     private Thread thread;
 

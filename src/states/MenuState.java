@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Window;
 import java.awt.AlphaComposite;
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
@@ -109,15 +110,15 @@ public class MenuState {
 
         // Opción "Jugar"
         g2d.setColor(Option == 0 ? Color.YELLOW : Color.WHITE);
-        g2d.drawString("Jugar", 850, 400);
+        g2d.drawString("Jugar", Window.HEIGHT/2, 400);
 
         // Opción "Controles"
         g2d.setColor(Option == 1 ? Color.YELLOW : Color.WHITE);
-        g2d.drawString("Controles", 800, 500);
+        g2d.drawString("Controles",Window.HEIGHT/2, 500);
 
         // Opción "Salir"
         g2d.setColor(Option == 2 ? Color.YELLOW : Color.WHITE);
-        g2d.drawString("Salir", 850, 600);
+        g2d.drawString("Salir", Window.HEIGHT/2, 600);
 
         // Restaura la transparencia al final del dibujo.
         if (animating) {

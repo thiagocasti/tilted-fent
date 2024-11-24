@@ -55,7 +55,6 @@ public class Enemigo extends GameObject{
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.drawImage(texture,  (int) position.getX(),  (int) position.getY(), null);
-		g.drawString(" vida enemigo :" + vidaEnemigo, 120, 10);
 		 for (Shoot shoot : shootsEnemys) {
 	            shoot.draw(g);
 	        }
