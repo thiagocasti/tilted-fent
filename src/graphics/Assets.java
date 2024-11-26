@@ -3,7 +3,7 @@ package graphics;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-	
+	//Se crean las variables como imagenes
 	public static BufferedImage player;
 	
 	public static BufferedImage MoveRightPlayer;
@@ -24,7 +24,7 @@ public class Assets {
 	
 	public static BufferedImage FondoMenu;
 
-	
+	//Se cargan las variables con los archivos
 	public static void init() 
 	{
 		player= Loader.ImageLoader("/Player/frame default 1.png");
